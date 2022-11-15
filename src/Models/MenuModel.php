@@ -91,7 +91,7 @@ class MenuModel extends Model
     private function getMenuDriverMySQLi($id)
     {
         return $this->db->table('menu')
-            ->select("menu.id, menu.parent_id, menu.active, menu.title, menu.icon, menu.route, groups_menu.menu_id, group_concat(groups_menu.group_id SEPARATOR '|') as group_id")
+            ->select("menu.id, menu.parent_id, menu.active, menu.title, menu.icon, menu.route, groups_menu.menu_id, group_concat('groups_menu.group_id' SEPARATOR '|') as group_id")
             ->join('groups_menu', 'menu.id = groups_menu.menu_id', 'left')
             ->join('auth_groups', 'groups_menu.group_id = auth_groups.id', 'left')
             ->where('menu.id', $id)
